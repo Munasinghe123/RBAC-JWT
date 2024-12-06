@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+
 
 const Home = () => {
     const { user } = useContext(AuthContext);
@@ -15,10 +16,14 @@ const Home = () => {
         }
     }
 
-    return <div>Welcome to the Home Page
+    return (
+        <div>
 
-        <Link to='/login'>Login</Link>
-    </div>;
+            <div className="home-content">
+                <h1>Welcome to the Home Page</h1>
+            </div>
+        </div>
+    );
 };
 
 export default Home;
