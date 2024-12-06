@@ -6,14 +6,16 @@ const authorizeRoles = require('../Middleware/RoleMiddleware');
 const router = express.Router();
 
 router.get('/admin', verifyToken, authorizeRoles("admin"), (req, res) => {
+    console.log('welcome admin');
     res.json({ message: 'welcome admin' });
+
 })
 
 router.get('/manager', verifyToken, authorizeRoles("admin", "manager"), (req, res) => {
     res.json({ message: 'welcome manager' });
 })
 
-router.get('/user', verifyToken, authorizeRoles("admin", "manager", "user"), (req, res) => {
+router.get('/user', verifyToken, authorizeRoles("admin", "user"), (req, res) => {
     res.json({ message: 'welcome user' });
 })
 
