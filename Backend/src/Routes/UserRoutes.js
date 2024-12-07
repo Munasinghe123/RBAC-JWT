@@ -11,11 +11,11 @@ router.get('/admin', verifyToken, authorizeRoles("admin"), (req, res) => {
 
 })
 
-router.get('/manager', verifyToken, authorizeRoles("admin", "manager"), (req, res) => {
+router.get('/faculty', verifyToken, authorizeRoles("admin", "faculty"), (req, res) => {
     res.json({ message: 'welcome manager' });
 })
 
-router.get('/user', verifyToken, authorizeRoles("admin", "user"), (req, res) => {
+router.get('/student', verifyToken, authorizeRoles("admin", "student"), (req, res) => {
     res.json({ message: 'welcome user' });
 })
 

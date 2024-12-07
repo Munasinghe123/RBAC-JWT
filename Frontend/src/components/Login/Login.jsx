@@ -17,10 +17,10 @@ const Login = () => {
             const response = await API.post('/api/auth/login', { name, password });
             const token = response.data.token;
 
-            console.log('JWT Token:', token); // Log the raw token
+            console.log('JWT Token:', token); 
             const decoded = jwtDecode(token);
 
-            console.log('Decoded Token:', decoded); // Log the decoded payload
+            console.log('Decoded Token:', decoded); 
             login(token);
 
             if (decoded.role === 'admin') {
