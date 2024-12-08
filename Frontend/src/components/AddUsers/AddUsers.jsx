@@ -31,6 +31,7 @@ function AddUsers() {
 
     return (
         <div className='add-user-container'>
+            <h1>Add users</h1>
             <form className='add-user-form' onSubmit={handleSubmit}>
 
                 <div className="form-group">

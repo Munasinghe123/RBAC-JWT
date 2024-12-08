@@ -17,18 +17,18 @@ const Login = () => {
             const response = await API.post('/api/auth/login', { name, password });
             const token = response.data.token;
 
-            console.log('JWT Token:', token); 
+            console.log('JWT Token:', token);
             const decoded = jwtDecode(token);
 
-            console.log('Decoded Token:', decoded); 
+            console.log('Decoded Token:', decoded);
             login(token);
 
             if (decoded.role === 'admin') {
                 navigate('/admin');
-            } else if (decoded.role === 'manager') {
-                navigate('/manager');
-            } else if (decoded.role === 'user') {
-                navigate('/user');
+            } else if (decoded.role === 'faculty') {
+                navigate('/faculty');
+            } else if (decoded.role === 'student') {
+                navigate('/student');
             } else {
                 console.error('Unknown role:', decoded.role);
                 navigate('/');
