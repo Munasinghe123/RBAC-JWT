@@ -19,8 +19,8 @@ app.use(cors());
 app.use(express.json());
 
 //routes
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes); 
+app.use("/api/users", userRoutes); //jwt protected routes
 
 //port
 const PORT = process.env.PORT || 7002;
