@@ -1,22 +1,26 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ViewStudents.css'
+import './ViewStudents.css';
 
 function ViewStudents() {
-
     const [user, setUser] = useState([]);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:7001/api/auth/getAllUsers');
+                const token = localStorage.getItem('token'); // Get the token from localStorage
+                const response = await axios.get('http://localhost:7001/api/users/getAllUsers', {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Attach the token to the request
+                    }
+                });
                 setUser(response.data);
             } catch (err) {
                 console.log(err);
-                alert('Failed to get the studets');
+                alert('Failed to get the students');
             }
-        }
+        };
         fetchUsers();
     }, []);
 
@@ -25,7 +29,6 @@ function ViewStudents() {
         <>
             <h1>Registered students</h1>
             <div className='table-container'>
-
                 {student.length > 0 ? (
                     <table className='users-table'>
                         <thead>
@@ -36,30 +39,24 @@ function ViewStudents() {
                             </tr>
                         </thead>
                         <tbody>
-                            {student.map((user) => {
-                                return (
-
-                                    <tr key={user._id}>
-                                        <td>{user.name}</td>
-                                        <td>{user.role}</td>
-                                        <td>
-                                            <button type='submit' className='update-btn'>Update</button>
-                                            <button type='update' className='delete-btn'>Delete</button>
-                                        </td>
-
-                                    </tr>
-
-                                );
-                            })}
+                            {student.map((user) => (
+                                <tr key={user._id}>
+                                    <td>{user.name}</td>
+                                    <td>{user.role}</td>
+                                    <td>
+                                        <button type='submit' className='update-btn'>Update</button>
+                                        <button type='update' className='delete-btn'>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 ) : (
                     <p>No users found</p>
                 )}
-
             </div>
         </>
-    )
+    );
 }
 
-export default ViewStudents
+export default ViewStudents;

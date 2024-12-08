@@ -1,8 +1,8 @@
 import React from 'react';
 import './AddUsers.css';
 import { useState } from 'react';
-import API from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function AddUsers() {
 
@@ -15,13 +15,24 @@ function AddUsers() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await API.post('/api/auth/register', { name, password, role });
-            console.log("user added successfully", response.data)
-            alert("user added successfully")
+            const token = localStorage.getItem('token');
+            const response = await axios.post('http://localhost:7001/api/users/register', { name, password, role },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Attach the token to the request
+                    }
+                }
+            );
 
-            e.target.reset();
+            if (response.status === 201) {
+                console.log("User added successfully", response.data);
+                alert("User added successfully");
 
-            navigate("/viewUsers");
+                e.target.reset();
+                navigate("/viewUsers");
+            } else {
+                alert("Failed to add user. Please try again.");
+            }
 
         } catch (err) {
             console.log("failed to add user", err);

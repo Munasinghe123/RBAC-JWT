@@ -1,8 +1,7 @@
 import React from 'react'
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import API from '../../services/api';
+
 
 import './ViewFaculty.css'
 
@@ -12,7 +11,12 @@ function ViewFaculty() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:7001/api/auth/getAllusers');
+                const token = localStorage.getItem('token');
+                const response = await axios.get('http://localhost:7001/api/users/getAllusers', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
                 setUsers(response.data);
             } catch (err) {
                 console.error('Error fetching users:', err);
