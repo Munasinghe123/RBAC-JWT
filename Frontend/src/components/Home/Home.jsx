@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-
+import './Home.css'
 
 const Home = () => {
     const { user } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <div className='home-container'>
 
             <div className="home-content">
                 <h1>Welcome to the Home Page</h1>

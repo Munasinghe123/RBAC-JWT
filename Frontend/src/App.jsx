@@ -11,6 +11,8 @@ import AddUsers from './components/AddUsers/AddUsers';
 import ViewUsers from './components/ViewUsers/ViewUsers';
 import ViewFaculty from './components/ViewFaculty/ViewFaculty';
 import ViewStudents from './components/ViewStudents/ViewStudents';
+import Footer from './components/Footer/Footer';
+import Update from './components/UpdateMember/Update';
 
 import { AuthContext } from './context/AuthContext';
 
@@ -36,6 +38,7 @@ const App = () => {
                 <Route path="/viewUsers" element={<ViewUsers />} />
                 <Route path="/viewStudents" element={<ViewStudents />} />
                 <Route path="/viewFaculty" element={<ViewFaculty />} />
+                <Route path="/update/:id" element={<Update />} />
               </>
             )}
 
@@ -52,7 +55,7 @@ const App = () => {
         )}
         <Route path="*" element={<NotFound />} />
       </Routes>
-
+      <Footer />
     </div>
   );
 };

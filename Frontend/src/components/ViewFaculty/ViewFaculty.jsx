@@ -1,9 +1,7 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-
-import './ViewFaculty.css'
+import { Link } from 'react-router-dom';
+import './ViewFaculty.css';
 
 function ViewFaculty() {
     const [users, setUsers] = useState([]);
@@ -29,6 +27,26 @@ function ViewFaculty() {
     // Filter users with role 'faculty'
     const facultyUsers = users.filter((user) => user.role === 'faculty');
 
+    // Delete function
+    const deleteMember = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.delete(`http://localhost:7001/api/users/deleteMember/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.status === 200) {
+                setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
+                alert('Member successfully deleted.');
+            }
+        } catch (err) {
+            console.error('Error deleting member:', err);
+            alert('Failed to delete the member. Please try again.');
+        }
+    };
+
     return (
         <div className="table-container">
             <h1>Faculty Users</h1>
@@ -37,7 +55,6 @@ function ViewFaculty() {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            {/* <th>Email</th> */}
                             <th>Role</th>
                             <th>Operations</th>
                         </tr>
@@ -46,11 +63,19 @@ function ViewFaculty() {
                         {facultyUsers.map((user) => (
                             <tr key={user._id}>
                                 <td>{user.name}</td>
-                                {/* <td>{user.email}</td> */}
                                 <td>{user.role}</td>
                                 <td>
-                                    <button type='submit' className='update-btn'>Update</button>
-                                    <button type='submit' className='delete-btn'>Delete</button>
+                                    <Link to={`/update/${user._id}`}>
+                                        <button type="submit" className="update-btn">Update</button>
+                                    </Link>
+
+                                    <button
+                                        type="submit"
+                                        className="delete-btn"
+                                        onClick={() => deleteMember(user._id)}
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -58,8 +83,9 @@ function ViewFaculty() {
                 </table>
             ) : (
                 <p>No faculty users found.</p>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
 
