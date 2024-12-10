@@ -54,6 +54,62 @@ const login = async (req, res) => {
     }
 }
 
+const deleteMember = async (req, res) => {
+    const id = req.params.id
+
+    let user;
+
+    try {
+        user = await model.findByIdAndDelete(id)
+    } catch (err) {
+        console.log(err)
+    }
+    if (!user) {
+        res.status(404).json({ message: "unabel to delete" })
+    }
+    res.status(200).json({ user })
+}
+
+const getUserById = async (req, res) => {
+    const id = req.params.id;
+
+    let user;
+
+    try {
+        user = await model.findById(id)
+
+    } catch (err) {
+        console.log(err)
+    }
+
+    if (!user) {
+        res.status(404).json({ message: "no users" })
+    }
+    res.status(200).json({ user })
+}
+
+const updateUser = async (req, res) => {
+    const id = req.params.id;
+    const { name } = req.body;
+
+    try {
+        // Await the promise returned by findByIdAndUpdate
+        const updatedUser = await model.findByIdAndUpdate(id, { name }, { new: true });
+
+        // Check if user was found and updated
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Respond with the updated user data
+        res.status(200).json({ user: updatedUser });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Failed to update user" });
+    }
+}
+
+
 module.exports = {
-    register, login, getAllUsers
+    register, login, getAllUsers, deleteMember, getUserById, updateUser
 }

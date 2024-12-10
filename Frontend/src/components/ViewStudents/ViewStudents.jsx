@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
 import './ViewStudents.css';
 
 function ViewStudents() {
@@ -24,6 +25,27 @@ function ViewStudents() {
         fetchUsers();
     }, []);
 
+    //delete
+    const deleteStudent = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.delete(`http://localhost:7001/api/users/deleteMember/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.status === 200) {
+                setUser((prevUsers) => prevUsers.filter((user) => user._id !== id));
+                alert('Member successfully deleted.');
+            }
+        } catch (err) {
+            console.error('Error deleting member:', err);
+            alert('Failed to delete the member. Please try again.');
+        }
+    };
+
+
     const student = user.filter((u) => u.role === 'student');
     return (
         <>
@@ -43,18 +65,21 @@ function ViewStudents() {
                                 <tr key={user._id}>
                                     <td>{user.name}</td>
                                     <td>{user.role}</td>
-                                    <td>
+                                    <td><Link to={`/update/${user._id}`} >
+
                                         <button type='submit' className='update-btn'>Update</button>
-                                        <button type='update' className='delete-btn'>Delete</button>
-                                    </td>
+
+                                    </Link>
+                                    <button type='submit' className='delete-btn' onClick={() => deleteStudent(user._id)}>Delete</button>
+                                </td>
                                 </tr>
                             ))}
-                        </tbody>
+                    </tbody>
                     </table>
-                ) : (
-                    <p>No users found</p>
+            ) : (
+            <p>No users found</p>
                 )}
-            </div>
+        </div >
         </>
     );
 }
