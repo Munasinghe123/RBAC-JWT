@@ -17,10 +17,10 @@ const getAllUsers = async (req, res) => {
 
 const register = async (req, res) => {
     try {
-        const { name, password, role } = req.body;
+        const { name, password, email, role } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = new model({ name, password: hashedPassword, role });
+        const newUser = new model({ name, password: hashedPassword, email, role });
         await newUser.save();
 
         res.status(201).json({ message: `new user created with name ${name}` });
@@ -90,11 +90,11 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const id = req.params.id;
-    const { name } = req.body;
+    const { name, email } = req.body;
 
     try {
         // Await the promise returned by findByIdAndUpdate
-        const updatedUser = await model.findByIdAndUpdate(id, { name }, { new: true });
+        const updatedUser = await model.findByIdAndUpdate(id, { name, email }, { new: true });
 
         // Check if user was found and updated
         if (!updatedUser) {

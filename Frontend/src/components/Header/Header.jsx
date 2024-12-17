@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './Header.css';
 
+
 const Header = () => {
     const { logout, user } = useContext(AuthContext);
     const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -11,7 +12,8 @@ const Header = () => {
         setDropdownVisible(visible);
     };
 
-    return (
+    return (<>
+
         <header className="home-header">
             <div className="header-content">
                 <div className="welcome-message">
@@ -48,6 +50,7 @@ const Header = () => {
                 )}
             </div>
         </header>
+    </>
     );
 };
 
