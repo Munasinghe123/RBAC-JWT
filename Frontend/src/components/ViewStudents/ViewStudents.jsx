@@ -57,6 +57,7 @@ function ViewStudents() {
                             <tr>
                                 <th>Name</th>
                                 <th>Role</th>
+                                <th>Emial</th>
                                 <th>Operations</th>
                             </tr>
                         </thead>
@@ -65,21 +66,22 @@ function ViewStudents() {
                                 <tr key={user._id}>
                                     <td>{user.name}</td>
                                     <td>{user.role}</td>
+                                    <td>{user.email}</td>
                                     <td><Link to={`/update/${user._id}`} >
 
                                         <button type='submit' className='update-btn'>Update</button>
 
                                     </Link>
-                                    <button type='submit' className='delete-btn' onClick={() => deleteStudent(user._id)}>Delete</button>
-                                </td>
+                                        <button type='submit' className='delete-btn' onClick={() => deleteStudent(user._id)}>Delete</button>
+                                    </td>
                                 </tr>
                             ))}
-                    </tbody>
+                        </tbody>
                     </table>
-            ) : (
-            <p>No users found</p>
+                ) : (
+                    <p>No users found</p>
                 )}
-        </div >
+            </div >
         </>
     );
 }

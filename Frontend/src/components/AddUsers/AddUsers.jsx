@@ -8,6 +8,7 @@ function AddUsers() {
 
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
     const [role, setRole] = useState('');
 
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ function AddUsers() {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:7001/api/users/register', { name, password, role },
+            const response = await axios.post('http://localhost:7001/api/users/register', { name, password, email, role },
                 {
                     headers: {
                         Authorization: `Bearer ${token}`, // Attach the token to the request
@@ -54,6 +55,16 @@ function AddUsers() {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
+
+                <div className='form-group'>
+                    <label htmlFor='email'>Email</label>
+                    <input type='email'
+                        name='userEmail'
+                        id='userEmail'
+                        required
+                        onChange={(e) => setEmail(e.target.value)} />
+                </div>
+
 
                 <div className="form-group">
                     <label htmlFor='password'>Password</label>
