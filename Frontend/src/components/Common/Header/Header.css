@@ -19,7 +19,7 @@
     height: 80px;
     /* Set the height */
     z-index: 1;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-sizing: border-box;
     /* Ensure padding is included in width/height */
 }

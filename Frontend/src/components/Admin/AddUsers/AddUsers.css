@@ -1,4 +1,10 @@
 .add-user-container {
+    height: 100vh;
+}
+
+.add-user-form {
+    display: flex;
+    flex-direction: column;
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -7,12 +13,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     margin-top: 100px;
-
-}
-
-.add-user-form {
-    display: flex;
-    flex-direction: column;
 }
 
 .form-group {
