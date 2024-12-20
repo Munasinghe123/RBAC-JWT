@@ -1,18 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login/Login';
-import AdminDashboard from './components/Admin/AdminDashboard';
+import Login from './components/Common/Login/Login';
+import AdminDashboard from './components/Admin/AdminDashBoard/AdminDashboard';
 import FacultyDashboard from './components/Faculty/FacultyDashboard';
 import StudentDashboard from './components/Student/StudentDashboard';
-import Home from './components/Home/Home';
+import Home from './components/Common/Home/Home';
 import NotFound from './components/NotFound/NotFound';
-import Header from './components/Header/Header';
-import AddUsers from './components/AddUsers/AddUsers';
-import ViewUsers from './components/ViewUsers/ViewUsers';
-import ViewFaculty from './components/ViewFaculty/ViewFaculty';
-import ViewStudents from './components/ViewStudents/ViewStudents';
-import Footer from './components/Footer/Footer';
-import Update from './components/UpdateMember/Update';
+import Header from './components/Common/Header/Header';
+import AddUsers from './components/Admin/AddUsers/AddUsers';
+import ViewUsers from './components/Admin/Users/ViewUsers/ViewUsers'
+import ViewFaculty from './components/Admin/Users/ViewFaculty/ViewFaculty'
+import ViewStudents from './components/Admin/Users/ViewStudents/ViewStudents'
+import Footer from './components/Common/Footer/Footer';
+import Update from './components/Admin/UpdateMember/Update';
 
 import { AuthContext } from './context/AuthContext';
 

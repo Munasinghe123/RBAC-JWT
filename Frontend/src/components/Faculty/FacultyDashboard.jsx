@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import './Faculty.css';
 
 function FacultyDashboard() {
     return (
-        <div>
-            <h1>Facluty Dashboard</h1>
+        <div className='faculty-container'>
+            <h1>Faculty Dashboard</h1>
         </div>
     )
 }
